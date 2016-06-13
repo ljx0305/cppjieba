@@ -2,6 +2,17 @@
 
 ## next version
 
++ add TextRankExtractor by [@questionfish] in [pull request 65](https://github.com/yanyiwu/cppjieba/pull/65)
++ add Jieba::ResetSeparators api for some special situation, for example in [issue67](https://github.com/yanyiwu/cppjieba/issues/67)
++ fix [issue70](https://github.com/yanyiwu/cppjieba/issues/70)
+
+## v4.8.0
+
++ rewrite QuerySegment, make `Jieba::CutForSearch` behaves the same as [jieba] `cut_for_search` api
++ remove Jieba::SetQuerySegmentThreshold
+
+## v4.7.0
+
 api changes:
 
 + override Cut functions, add location information into Word results;
@@ -216,3 +227,5 @@ upgrade:
 [husky]:http://github.com/yanyiwu/husky.git
 [issue50]:https://github.com/yanyiwu/cppjieba/issues/50
 [qinwf]:https://github.com/yanyiwu/cppjieba/pull/53#issuecomment-176264929
+[jieba]:https://github.com/fxsjy/jieba
+[@questionfish]:https://github.com/questionfish

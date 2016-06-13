@@ -5,6 +5,7 @@
 [![Platform](https://img.shields.io/badge/platform-Linux,%20OS%20X,%20Windows-green.svg?style=flat)](https://github.com/yanyiwu/cppjieba)
 [![Performance](https://img.shields.io/badge/performance-excellent-brightgreen.svg?style=flat)](http://yanyiwu.com/work/2015/06/14/jieba-series-performance-test.html) 
 [![License](https://img.shields.io/badge/license-MIT-yellow.svg?style=flat)](http://yanyiwu.mit-license.org)
+[![Build status](https://ci.appveyor.com/api/projects/status/wl30fjnm2rhft6ta/branch/master?svg=true)](https://ci.appveyor.com/project/yanyiwu/cppjieba/branch/master)
 
 [![logo](http://7viirv.com1.z0.glb.clouddn.com/CppJiebaLogo-v1.png)](https://github.com/yanyiwu/cppjieba)
 
@@ -15,7 +16,7 @@ CppJieba是"结巴(Jieba)"中文分词的C++版本
 ## 特性
 
 + 源代码都写进头文件`include/cppjieba/*.hpp`里，`include`即可使用。
-+ 支持`utf-8, gbk`编码，但是推荐使用`utf-8`编码， 因为`gbk`编码缺少严格测试，慎用。
++ 支持`utf8`编码。
 + 项目自带较为完善的单元测试，核心功能中文分词(utf8)的稳定性接受过线上环境检验。
 + 支持载自定义用户词典，多路径时支持分隔符'|'或者';'分隔。
 + 支持 `Linux` , `Mac OSX`, `Windows` 操作系统。
@@ -54,18 +55,20 @@ make test
 
 ```
 [demo] Cut With HMM
-我/是/拖拉机/学院/手扶拖拉机/专业/的/。/不用/多久/，/我/就/会/升职/加薪/，/当上/CEO/，/走上/人生/巅峰/。
+他/来到/了/网易/杭研/大厦
 [demo] Cut Without HMM
-我/是/拖拉机/学院/手扶拖拉机/专业/的/。/不用/多久/，/我/就/会/升职/加薪/，/当/上/C/E/O/，/走上/人生/巅峰/。
+他/来到/了/网易/杭/研/大厦
+我来到北京清华大学
 [demo] CutAll
-我/是/拖拉/拖拉机/学院/手扶/手扶拖拉机/拖拉/拖拉机/专业/的/。/不用/多久/，/我/就/会升/升职/加薪/，/当上/C/E/O/，/走上/人生/巅峰/。
+我/来到/北京/清华/清华大学/华大/大学
+小明硕士毕业于中国科学院计算所，后在日本京都大学深造
 [demo] CutForSearch
-我/是/拖拉机/学院/手扶/手扶拖拉机/拖拉/拖拉机/专业/的/。/不用/多久/，/我/就/会/升职/加薪/，/当上/CEO/，/走上/人生/巅峰/。
+小明/硕士/毕业/于/中国/科学/学院/科学院/中国科学院/计算/计算所/，/后/在/日本/京都/大学/日本京都大学/深造
 [demo] Insert User Word
 男默/女泪
 男默女泪
 [demo] CutForSearch Word With Offset
-[{"word": "南京市", "offset": 0}, {"word": "长江", "offset": 9}, {"word": "长江大桥", "offset": 9}, {"word": "大桥", "offset": 15}]
+[{"word": "小明", "offset": 0}, {"word": "硕士", "offset": 6}, {"word": "毕业", "offset": 12}, {"word": "于", "offset": 18}, {"word": "中国", "offset": 21}, {"word": "科学", "offset": 27}, {"word": "学院", "offset": 30}, {"word": "科学院", "offset": 27}, {"word": "中国科学院", "offset": 21}, {"word": "计算", "offset": 36}, {"word": "计算所", "offset": 36}, {"word": "，", "offset": 45}, {"word": "后", "offset": 48}, {"word": "在", "offset": 51}, {"word": "日本", "offset": 54}, {"word": "京都", "offset": 60}, {"word": "大学", "offset": 66}, {"word": "日本京都大学", "offset": 54}, {"word": "深造", "offset": 72}]
 [demo] Tagging
 我是拖拉机学院手扶拖拉机专业的。不用多久，我就会升职加薪，当上CEO，走上人生巅峰。
 [我:r, 是:v, 拖拉机:n, 学院:n, 手扶拖拉机:n, 专业:n, 的:uj, 。:x, 不用:v, 多久:m, ，:x, 我:r, 就:d, 会:v, 升职:v, 加薪:nr, ，:x, 当上:t, CEO:eng, ，:x, 走上:v, 人生:n, 巅峰:n, 。:x]
@@ -206,7 +209,7 @@ Query方法先使用Mix方法切词，对于切出来的较长的词再使用Ful
 
 ## 其它词典资料分享
 
-+ [dict.367W.utf8.tar.gz] iLife(`562193561@qq.com`)
++ [dict.367W.utf8] iLife(562193561 at qq.com)
 
 ## 应用
 
@@ -224,6 +227,7 @@ Query方法先使用Mix方法切词，对于切出来的较长的词再使用Ful
 + [ngx_http_cppjieba_module] Nginx 分词插件。
 + [cppjiebapy] 由 [jannson] 开发的供 python 模块调用的项目 [cppjiebapy], 相关讨论 [cppjiebapy_discussion] .
 + [KeywordServer] 50行搭建一个中文关键词抽取服务。
++ [cppjieba-server] CppJieba HTTP 服务器。
 
 ## 线上演示
 
@@ -266,7 +270,7 @@ Query方法先使用Mix方法切词，对于切出来的较长的词再使用Ful
 [exjieba]:https://github.com/falood/exjieba
 [KeywordServer]:https://github.com/yanyiwu/keyword_server
 [ngx_http_cppjieba_module]:https://github.com/yanyiwu/ngx_http_cppjieba_module
-[dict.367W.utf8.tar.gz]:http://pan.baidu.com/s/1o6A0BWY
+[dict.367W.utf8]:https://github.com/qinwf/BigDict
 [cjieba]:http://github.com/yanyiwu/cjieba
 [jieba_rb]:https://github.com/altkatz/jieba_rb
 [iosjieba]:https://github.com/yanyiwu/iosjieba
@@ -274,6 +278,7 @@ Query方法先使用Mix方法切词，对于切出来的较长的词再使用Ful
 [Jieba中文分词系列性能评测]:http://yanyiwu.com/work/2015/06/14/jieba-series-performance-test.html
 [pg_jieba]:https://github.com/jaiminpan/pg_jieba
 [gitbook-plugin-search-pro]:https://plugins.gitbook.com/plugin/search-pro
+[cppjieba-server]:https://github.com/yanyiwu/cppjieba-server
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/yanyiwu/cppjieba/trend.png)](https://bitdeli.com/free "Bitdeli Badge")

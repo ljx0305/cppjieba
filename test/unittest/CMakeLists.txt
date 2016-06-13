@@ -3,7 +3,7 @@ SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/deps/gtest/include)
 
-ADD_DEFINITIONS(-DLOGGER_LEVEL=LL_WARNING)
+ADD_DEFINITIONS(-DLOGGING_LEVEL=LL_WARNING)
 
 ADD_EXECUTABLE(test.run 
     gtest_main.cpp 
@@ -14,6 +14,11 @@ ADD_EXECUTABLE(test.run
     jieba_test.cpp
     pre_filter_test.cpp
     unicode_test.cpp
+    textrank_test.cpp
 )
-TARGET_LINK_LIBRARIES(test.run gtest pthread)
 
+if(MSVC)
+	TARGET_LINK_LIBRARIES(test.run gtest)
+else()
+	TARGET_LINK_LIBRARIES(test.run gtest pthread)
+endif()
